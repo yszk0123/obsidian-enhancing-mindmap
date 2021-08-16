@@ -134,7 +134,7 @@ export default class MindMap {
     setMenuIcon(){
         var addNodeDom = document.createElement('span');
         var deleteNodeDom = document.createElement('span');
-        addNodeDom.classList.add('mm-icon-add-node'); 
+        addNodeDom.classList.add('mm-icon-add-node');
         deleteNodeDom.classList.add('mm-icon-delete-node');
         addNodeDom.innerHTML = addIcon;
         deleteNodeDom.innerHTML = deleteIcon;
@@ -246,7 +246,7 @@ export default class MindMap {
         document.addEventListener('keyup', this.appKeyup);
         document.addEventListener('keydown', this.appKeydown);
         document.body.addEventListener('mousewheel', this.appMousewheel);
-        
+
         if(Platform.isDesktop){
             this.appEl.addEventListener('mousedown', this.appMouseDown);
             this.appEl.addEventListener('mouseup', this.appMouseUp);
@@ -276,7 +276,7 @@ export default class MindMap {
             this.appEl.removeEventListener('mousedown', this.appMouseDown);
             this.appEl.removeEventListener('mouseup', this.appMouseUp);
         }
-        
+
         this.appEl.removeEventListener('mousemove', this.appMouseMove);
 
         this.off('initNode', this.initNode);
@@ -352,7 +352,7 @@ export default class MindMap {
         var ctrlKey = e.ctrlKey || e.metaKey;
         var shiftKey = e.shiftKey;
         if (!ctrlKey && !shiftKey) {
-            //enter 
+            //enter
             if (keyCode == 13 || e.key =='Enter') {
                 var node = this.selectNode;
                 if (node && !node.isEdit) {
@@ -535,7 +535,7 @@ export default class MindMap {
         var targetEl = evt.target as HTMLElement;
 
         if (targetEl) {
-             
+
             if (targetEl.tagName == 'A' && targetEl.hasClass("internal-link")) {
                 evt.preventDefault();
                 var targetEl = evt.target as HTMLElement;
@@ -666,12 +666,12 @@ export default class MindMap {
         }else{
             this._indicateDom.style.display = 'none';
         }
-        
+
     }
 
     _getDragType(node:INode, x:number, y:number) {
         if (!node) return;
-    
+
         var box = node.contentEl.getBoundingClientRect();
 
         box.x = box.x
@@ -772,8 +772,8 @@ export default class MindMap {
             }
         }else{
             if(this.drag){
-                this.containerEL.scrollLeft = this._left - (evt.pageX - this.startX); 
-                this.containerEL.scrollTop = this._top - (evt.pageY - this.startY); 
+                this.containerEL.scrollLeft = this._left - (evt.pageX - this.startX);
+                this.containerEL.scrollTop = this._top - (evt.pageY - this.startY);
             }
         }
     }
@@ -921,7 +921,7 @@ export default class MindMap {
             dropNode.expand();
         }
 
-        if (type == 'top' || type == 'left' ||type == 'down' || type == 'right') {   
+        if (type == 'top' || type == 'left' ||type == 'down' || type == 'right') {
            this.execute('moveNode', { type: 'siblings', node: dragNode, oldParent: dragNode.parent, dropNode, direct: type })
         }
         else if (type.indexOf('child') > -1) {
