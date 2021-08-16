@@ -155,7 +155,9 @@ export default class MindMapPlugin extends Plugin {
       this.app.metadataCache.on("changed", (file) => {
         this.app.workspace.getLeavesOfType(mindmapViewType).forEach((leaf) => {
           const view = leaf.view as MindMapView;
-          view.onFileMetadataChange(file);
+          if (view.file.path === file.path) {
+            view.onFileMetadataChange(file);
+          }
         });
       })
     );
