@@ -162,6 +162,21 @@ export default class MindMapPlugin extends Plugin {
       })
     );
 
+    this.registerEvent(
+      this.app.workspace.on('active-leaf-change', (leaf) => {
+        const isMindmap = leaf.view.getViewType() === mindmapViewType;
+        this.app.workspace.getLeavesOfType(mindmapViewType).forEach((leaf) => {
+          const view = leaf.view as MindMapView;
+          if (isMindmap) {
+            view.mindmap?.removeEvent();
+            view.mindmap?.initEvent();
+          } else {
+            view.mindmap?.removeEvent();
+          }
+        });
+      })
+    )
+
     // @ts-ignore
     // this.app.workspace.registerHoverLinkSource(frontMatterKey, {
     //   display: mindmapViewType,
