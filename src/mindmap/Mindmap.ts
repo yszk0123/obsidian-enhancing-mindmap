@@ -1116,9 +1116,9 @@ export default class MindMap {
 
     setScale(type: string) {
         if (type == "up") {
-            var n = this.mindScale + 10;
+            var n = this.mindScale + 1;
         } else {
-            var n = this.mindScale - 10;
+            var n = this.mindScale - 1;
         }
         this.scale(n);
 
