@@ -20,6 +20,7 @@ export default class MindMapPlugin extends Plugin {
   mindmapFileModes: { [file: string]: string } = {};
   _loaded: boolean = false;
   timeOut: any = null;
+  private _isMindmap = false;
 
   async onload() {
 
@@ -165,6 +166,12 @@ export default class MindMapPlugin extends Plugin {
     this.registerEvent(
       this.app.workspace.on('active-leaf-change', (leaf) => {
         const isMindmap = leaf.view.getViewType() === mindmapViewType;
+        const shouldUpdate = !this._isMindmap && !isMindmap;
+        this._isMindmap = isMindmap;
+        if (!shouldUpdate) {
+          return;
+        }
+
         this.app.workspace.getLeavesOfType(mindmapViewType).forEach((leaf) => {
           const view = leaf.view as MindMapView;
           if (isMindmap) {
